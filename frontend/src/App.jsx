@@ -12,7 +12,7 @@ import MediaDisplay from './components/MediaDisplay.jsx'
 import Loading from './components/Loading.jsx'
 import Empty from './components/Empty.jsx'
 import Error from './components/Error.jsx'
-
+import { sortByTitle, sortByDate, sortByRating } from './utils/sortHelpers.js'
 
 
 
@@ -61,13 +61,6 @@ function App() {
   function addMedia(e) {
     e.preventDefault()
 
-    function sortByTitle(res) {
-      const sortedMedia = [res, ...media]
-      return setMedia(
-        sortedMedia.toSorted((a, b) => a.title.localeCompare(b.title))
-      )
-
-    }
 
     let titleObject = {
       title: newTitle,
@@ -76,15 +69,14 @@ function App() {
     }
     axios.post(`${BASE_URL}/api/media`, titleObject)
       .then(res => {
-        console.log(res)
         if (sort === 'default') {
-          console.log(sort)
-          console.log(media)
           setMedia([res.data, ...media])
         } else if (sort === 'al') {
-          console.log(sort)
-          console.log(media)
-          sortByTitle(res.data)
+          sortByTitle(res.data, media, setMedia)
+        } else if (sort === 'rating'){
+          sortByRating(res.data, media, setMedia)
+        } else if (sort === 'finished'){
+          sortByDate(res.data, media, setMedia)
         }
         setNewTitle('')
         setNewRating('')
