@@ -56,7 +56,7 @@ function App() {
       })
   }, [BASE_URL])
 
-
+ 
 
   function addMedia(e) {
     e.preventDefault()
@@ -112,6 +112,8 @@ function App() {
       }
     )
       .then(response => {
+        console.log(`${BASE_URL}/api/media/${id}`)
+        let media = [...media]
         setMedia(media.map(item =>
           item.id === id
             ? response.data

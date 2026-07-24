@@ -9,27 +9,58 @@ const PORT = process.env.PORT
 app.use(express.json())
 app.use(cors())
 
+// app.use((req, res, next) => {
+//   res.setHeader(
+//     'Content-Security-Policy',
+//     "connect-src 'self' http://localhost:3001/api/media;" // Replace with your source-expression-list
+//   );
+//   next();
+// });
+
 let media = [
-    {title: "Perfume", dateFinished: "4/5/26", rating:5, id: Math.random()},
-     {title: "Perfame", dateFinished: "4/5/26", rating:5, id: Math.random()},
-      {title: "Perfumt", dateFinished: "4/5/26", rating:5, id: Math.random()},
-    {title: "Body Double", dateFinished: "6/4/26", rating:3, id: Math.random()},
-    {title: "Malazan Book 2", dateFinished: "5/22/26", rating:1, id: 3 },
-    {title: "Stalin", dateFinished: "5/22/1990", rating:2, id: 10 },
-    {title: "King of the World", dateFinished: "5/01/19", rating:1, id:9 }
+    { title: "Perfume", dateFinished: "4/5/26", rating: 5, id: Math.random() },
+    { title: "Perfame", dateFinished: "4/5/26", rating: 5, id: Math.random() },
+    { title: "Perfumt", dateFinished: "4/5/26", rating: 5, id: Math.random() },
+    { title: "Body Double", dateFinished: "6/4/26", rating: 3, id: Math.random() },
+    { title: "Malazan Book 2", dateFinished: "5/22/26", rating: 1, id: 3 },
+    { title: "Stalin", dateFinished: "5/22/1990", rating: 2, id:10 },
+    { title: "King of the World", dateFinished: "5/01/19", rating: 1, id: 9 }
 ]
 
 app.get('/api/media/', (request, response) => {
     response.json(media)
 })
 
+app.get('/api/media/:id', (request, response) => {
+    const itemId = parseInt(request.params.id)
+    const item = media.find(m => m.id === itemId)
+    if (item) {
+        response.json(item)
+    } else {
+        response.status(404).end()
+    }
+
+})
+
+app.delete('/api/media/:id', (req, res) => {
+    const id = req.params.id
+
+    media = media.filter(item => item.id !== id)
+
+    res.status(204).end()
+
+
+})
+
+
+
 app.patch('/api/media/:id', (req, res) => {
     const id = Number(req.params.id)
 
-    media = media.map(item => 
+    media = media.map(item =>
         item.id === id
-        ? {...item, ...req.body}
-        : item
+            ? { ...item, ...req.body }
+            : item
     )
 
     const updatedMedia = media.find(item =>
@@ -37,6 +68,9 @@ app.patch('/api/media/:id', (req, res) => {
     )
     res.json(updatedMedia)
 })
+
+// edit bug:
+// can't patch added media
 
 
 app.post('/api/media', (request, response) => {
@@ -56,15 +90,7 @@ app.post('/api/media', (request, response) => {
 
 })
 
-app.delete('/api/media/:id', (req, res) => {
-    const id = req.params.id
 
-    media = media.filter(item => item.id !== id)
-
-    res.status(204).end()
-
-
-})
 
 
 app.listen(PORT, () => {
