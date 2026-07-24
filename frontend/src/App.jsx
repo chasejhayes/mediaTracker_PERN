@@ -56,7 +56,7 @@ function App() {
       })
   }, [BASE_URL])
 
-  // 
+
 
   function addMedia(e) {
     e.preventDefault()
@@ -69,13 +69,14 @@ function App() {
     }
     axios.post(`${BASE_URL}/api/media`, titleObject)
       .then(res => {
+        // TODO: turn into switch statement (?)
         if (sort === 'default') {
           setMedia([res.data, ...media])
         } else if (sort === 'al') {
           sortByTitle(res.data, media, setMedia)
-        } else if (sort === 'rating'){
+        } else if (sort === 'rating') {
           sortByRating(res.data, media, setMedia)
-        } else if (sort === 'finished'){
+        } else if (sort === 'finished') {
           sortByDate(res.data, media, setMedia)
         }
         setNewTitle('')
@@ -120,6 +121,9 @@ function App() {
       .catch(error => {
         console.log(error)
       })
+    setNewTitle('')
+    setNewRating('')
+    setNewFinishDate('')
     setShowEditForm(false)
   }
 
