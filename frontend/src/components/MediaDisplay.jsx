@@ -24,13 +24,13 @@ export default function MediaDisplay({
     displayType = searchArr
   }
   
+  console.log(media.map(media => media.id))
 
   return (
     <div>
       <ul id='card'>
         {displayType.map((media) =>
-          <div className='list_item'>
-            <li key={media.id}>
+            <li className="list_item" key={media.id}>
               <h2>{media.title}</h2>
               <p>Date Finished: {media.dateFinished}</p>
               <p>Rating: {media.rating}</p>
@@ -40,7 +40,6 @@ export default function MediaDisplay({
                 Edit
               </button>
             </li>
-          </div>
         )}
       </ul>
     </div>

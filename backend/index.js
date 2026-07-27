@@ -9,13 +9,6 @@ const PORT = process.env.PORT
 app.use(express.json())
 app.use(cors())
 
-// app.use((req, res, next) => {
-//   res.setHeader(
-//     'Content-Security-Policy',
-//     "connect-src 'self' http://localhost:3001/api/media;" // Replace with your source-expression-list
-//   );
-//   next();
-// });
 
 let media = [
     { title: "Perfume", dateFinished: "4/5/26", rating: 5, id: Math.random().toString(36).slice(2) },
@@ -52,30 +45,19 @@ app.delete('/api/media/:id', (req, res) => {
 
 })
 
-// Issue is that the id numbers are not matching as true, fixed with Number prefix but that doesn't work with the newly created ids as they are a string
-
-
 
 app.patch('/api/media/:id', (req, res) => {
     const id = req.params.id
-    console.log(id)
-    console.log(req.body)
-
-    console.log(media)
     media = media.map(item =>
         item.id === id
             ? { ...item, ...req.body }
             : item
     )
 
-    console.log(media)
-
     const updatedMedia = media.find(item =>
         item.id === id
     )
-    console.log(updatedMedia)
     res.json(updatedMedia)
-
 })
 
 
