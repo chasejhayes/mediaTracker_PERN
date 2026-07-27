@@ -18,13 +18,13 @@ app.use(cors())
 // });
 
 let media = [
-    { title: "Perfume", dateFinished: "4/5/26", rating: 5, id: Math.random() },
-    { title: "Perfame", dateFinished: "4/5/26", rating: 5, id: Math.random() },
-    { title: "Perfumt", dateFinished: "4/5/26", rating: 5, id: Math.random() },
-    { title: "Body Double", dateFinished: "6/4/26", rating: 3, id: Math.random() },
-    { title: "Malazan Book 2", dateFinished: "5/22/26", rating: 1, id: 3 },
-    { title: "Stalin", dateFinished: "5/22/1990", rating: 2, id:10 },
-    { title: "King of the World", dateFinished: "5/01/19", rating: 1, id: 9 }
+    { title: "Perfume", dateFinished: "4/5/26", rating: 5, id: Math.random().toString(36).slice(2) },
+    { title: "Perfame", dateFinished: "4/5/26", rating: 5, id: Math.random().toString(36).slice(2) },
+    { title: "Perfumt", dateFinished: "4/5/26", rating: 5, id: Math.random().toString(36).slice(2) },
+    { title: "Body Double", dateFinished: "6/4/26", rating: 3, id: Math.random().toString(36).slice(2)},
+    { title: "Malazan Book 2", dateFinished: "5/22/26", rating: 1, id: Math.random().toString(36).slice(2) },
+    { title: "Stalin", dateFinished: "5/22/1990", rating: 2, id: Math.random().toString(36).slice(2) },
+    { title: "King of the World", dateFinished: "5/01/19", rating: 1, id: Math.random().toString(36).slice(2)}
 ]
 
 app.get('/api/media/', (request, response) => {
@@ -52,25 +52,33 @@ app.delete('/api/media/:id', (req, res) => {
 
 })
 
+// Issue is that the id numbers are not matching as true, fixed with Number prefix but that doesn't work with the newly created ids as they are a string
+
 
 
 app.patch('/api/media/:id', (req, res) => {
-    const id = Number(req.params.id)
+    const id = req.params.id
+    console.log(id)
+    console.log(req.body)
 
+    console.log(media)
     media = media.map(item =>
         item.id === id
             ? { ...item, ...req.body }
             : item
     )
 
+    console.log(media)
+
     const updatedMedia = media.find(item =>
         item.id === id
     )
+    console.log(updatedMedia)
     res.json(updatedMedia)
+
 })
 
-// edit bug:
-// can't patch added media
+
 
 
 app.post('/api/media', (request, response) => {

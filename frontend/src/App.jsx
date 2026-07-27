@@ -98,22 +98,28 @@ function App() {
       )
   }
 
+  // it's an issue with the media id
+  // look at the network tab - posting to 'undefined'
+  // probably the same reason the 'key' isn't registering as having unique ids
+
   function editMedia(e) {
     e.preventDefault()
     let id = newId;
     console.log(id)
 
-    axios.patch(
-      `${BASE_URL}/api/media/${id}`,
+    let patchRequest = 
       {
         rating: newRating,
         title: newTitle,
-        dateFinished: newFinishDate
+        dateFinished: newFinishDate,
+        id: newId
       }
+
+    axios.patch(
+      `${BASE_URL}/api/media/${id}`, patchRequest
     )
       .then(response => {
         console.log(`${BASE_URL}/api/media/${id}`)
-        let media = [...media]
         setMedia(media.map(item =>
           item.id === id
             ? response.data

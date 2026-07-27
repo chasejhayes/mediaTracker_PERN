@@ -23,7 +23,7 @@ export default function MediaDisplay({
   } else if (toggleSearch) {
     displayType = searchArr
   }
-
+  
 
   return (
     <div>
