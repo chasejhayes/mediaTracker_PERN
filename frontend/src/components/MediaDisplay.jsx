@@ -6,6 +6,9 @@ export default function MediaDisplay({
   searchArr,
   deleteMedia,
   setNewId,
+  setNewTitle,
+  setNewRating,
+  setNewFinishDate,
   showEditForm,
   setShowEditForm
 
@@ -23,8 +26,6 @@ export default function MediaDisplay({
   } else if (toggleSearch) {
     displayType = searchArr
   }
-  
-  console.log(media.map(media => media.id))
 
   return (
     <div>
@@ -36,7 +37,7 @@ export default function MediaDisplay({
               <p>Rating: {media.rating}</p>
               <button onClick={() => deleteMedia(media.id)}
               >Delete</button>
-              <button onClick={() => { setNewId(media.id); handleShowEditForm() }}>
+              <button onClick={() => { setNewId(media.id); setNewTitle(media.title); setNewRating(media.rating); setNewFinishDate(media.dateFinished), handleShowEditForm() }}>
                 Edit
               </button>
             </li>

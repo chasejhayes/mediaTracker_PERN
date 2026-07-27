@@ -98,14 +98,17 @@ function App() {
       )
   }
 
-  // it's an issue with the media id
-  // look at the network tab - posting to 'undefined'
-  // probably the same reason the 'key' isn't registering as having unique ids
+
+// on button click, set title, rating, and date values by mapping over id value, clear on submit 
 
   function editMedia(e) {
     e.preventDefault()
     let id = newId;
-    console.log(id)
+
+    setNewTitle('')
+    setNewRating('')
+    setNewFinishDate('')
+
 
     let patchRequest = 
       {
@@ -143,9 +146,9 @@ function App() {
       <Button text="Add Media" setShowForm={setShowForm} showForm={showForm} />
       <SortMenu text="Sort By:" htmlFor="media" media={media} value={sort} setSort={setSort} setMedia={setMedia} />
 
-      <UserForm onSubmit={addMedia} newTitle={newTitle} setNewTitle={setNewTitle} newRating={newRating} setNewRating={setNewRating} newFinishDate={newFinishDate} setNewFinishDate={setNewFinishDate} showForm={showForm} />
+      <UserForm onSubmit={addMedia} newTitle={newTitle} setNewTitle={setNewTitle} newRating={newRating} setNewRating={setNewRating} newFinishDate={newFinishDate} setNewFinishDate={setNewFinishDate} showForm={showForm} buttonText="Add"/>
 
-      <UserForm onSubmit={editMedia} newTitle={newTitle} setNewTitle={setNewTitle} newRating={newRating} setNewRating={setNewRating} newFinishDate={newFinishDate} setNewFinishDate={setNewFinishDate} showForm={showEditForm} />
+      <UserForm onSubmit={editMedia} newTitle={newTitle} setNewTitle={setNewTitle} newRating={newRating} setNewRating={setNewRating} newFinishDate={newFinishDate} setNewFinishDate={setNewFinishDate} showForm={showEditForm} buttonText="Edit"/>
 
       <SearchBar value={test} setToggleSearch={setToggleSearch} setTest={setTest} setSearchArr={setSearchArr} media={media} />
 
@@ -157,7 +160,7 @@ function App() {
 
       <Error error={error} text={`${error}`} />
 
-      <MediaDisplay media={media} toggleFilter={toggleFilter} filter={filter} toggleSearch={toggleSearch} searchArr={searchArr} deleteMedia={deleteMedia} setNewId={setNewId} showEditForm={showEditForm} setShowEditForm={setShowEditForm} />
+      <MediaDisplay media={media} toggleFilter={toggleFilter} filter={filter} toggleSearch={toggleSearch} searchArr={searchArr} deleteMedia={deleteMedia} setNewId={setNewId} showEditForm={showEditForm} setShowEditForm={setShowEditForm} setNewTitle={setNewTitle} setNewRating={setNewRating} setNewFinishDate={setNewFinishDate} />
 
     </div>
   )

@@ -6,8 +6,10 @@ export default function UserForm({
   setNewRating,
   newFinishDate,
   setNewFinishDate,
-  showForm
+  showForm,
+  buttonText
 }) {
+
 
 
   if (showForm === true)
@@ -29,7 +31,7 @@ export default function UserForm({
               value={newFinishDate}
               onChange={(e) => setNewFinishDate(e.target.value)} />
           </label>
-          <button type="submit">add</button>
+          <button type="submit">{buttonText}</button>
         </form>
       </div>
     )
