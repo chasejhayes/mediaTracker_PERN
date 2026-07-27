@@ -98,9 +98,6 @@ function App() {
       )
   }
 
-
-// on button click, set title, rating, and date values by mapping over id value, clear on submit 
-
   function editMedia(e) {
     e.preventDefault()
     let id = newId;
@@ -143,7 +140,7 @@ function App() {
   return (
     <div>
       <Header text="Media Tracker" id="header_div" />
-      <Button text="Add Media" setShowForm={setShowForm} showForm={showForm} />
+      <Button text="Add Media" setShowForm={setShowForm} showForm={showForm} setNewTitle={setNewTitle} setNewRating={setNewRating} setNewId={setNewId} setNewFinishDate={setNewFinishDate} />
       <SortMenu text="Sort By:" htmlFor="media" media={media} value={sort} setSort={setSort} setMedia={setMedia} />
 
       <UserForm onSubmit={addMedia} newTitle={newTitle} setNewTitle={setNewTitle} newRating={newRating} setNewRating={setNewRating} newFinishDate={newFinishDate} setNewFinishDate={setNewFinishDate} showForm={showForm} buttonText="Add"/>
