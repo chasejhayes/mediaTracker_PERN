@@ -11,8 +11,8 @@ app.use(cors())
 
 
 let media = [
-    { title: "Perfume", dateFinished: "4/5/26", rating: 5, id: Math.random().toString(36).slice(2) },
-    { title: "Perfame", dateFinished: "4/5/26", rating: 5, id: Math.random().toString(36).slice(2) },
+    { title: "Perfume", dateFinished: "4/5/26", rating: 2, id: Math.random().toString(36).slice(2) },
+    { title: "Perfame", dateFinished: "4/5/26", rating: 3, id: Math.random().toString(36).slice(2) },
     { title: "Perfumt", dateFinished: "4/5/26", rating: 5, id: Math.random().toString(36).slice(2) },
     { title: "Body Double", dateFinished: "6/4/26", rating: 3, id: Math.random().toString(36).slice(2)},
     { title: "Malazan Book 2", dateFinished: "5/22/26", rating: 1, id: Math.random().toString(36).slice(2) },
@@ -88,12 +88,3 @@ app.listen(PORT, () => {
 })
 
 
-/*
-test
-{
-        "title": "Russian Course",
-        "dateFinished": "Ongoing",
-        "rating": "Incomplete"
-    }
-
-*/

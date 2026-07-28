@@ -135,12 +135,27 @@ function App() {
     setShowEditForm(false)
   }
 
+  // Search/filter/sort bugs
+  // Filtered results can not be searched
+  // Filtered results do not sort
+  // Searched results can not be filtered
+  // Searched results can not be sorted
+
+  // Sorted results CAN be searched!
+  // Sorted results CAN be filtered!
+
+  // Filter doesn't work because it's displaying a filtered form of the media list. The media list itself stays the same unlike with the sort function which directly changes media
+  // Same issue for the search bar, it's filtering 'media' not changing it
+  // Solution: try using map to return a new version of media array
+
+  
+
 
 
   return (
     <div>
       <Header text="Media Tracker" id="header_div" />
-      <Button text="Add Media" setShowForm={setShowForm} showForm={showForm} setNewTitle={setNewTitle} setNewRating={setNewRating} setNewId={setNewId} setNewFinishDate={setNewFinishDate} />
+      <Button text="Add Media" setShowForm={setShowForm} setShowEditForm={setShowEditForm} showForm={showForm} setNewTitle={setNewTitle} setNewRating={setNewRating} setNewId={setNewId} setNewFinishDate={setNewFinishDate} />
       <SortMenu text="Sort By:" htmlFor="media" media={media} value={sort} setSort={setSort} setMedia={setMedia} />
 
       <UserForm onSubmit={addMedia} newTitle={newTitle} setNewTitle={setNewTitle} newRating={newRating} setNewRating={setNewRating} newFinishDate={newFinishDate} setNewFinishDate={setNewFinishDate} showForm={showForm} buttonText="Add"/>
@@ -157,7 +172,7 @@ function App() {
 
       <Error error={error} text={`${error}`} />
 
-      <MediaDisplay media={media} toggleFilter={toggleFilter} filter={filter} toggleSearch={toggleSearch} searchArr={searchArr} deleteMedia={deleteMedia} setNewId={setNewId} showEditForm={showEditForm} setShowEditForm={setShowEditForm} setNewTitle={setNewTitle} setNewRating={setNewRating} setNewFinishDate={setNewFinishDate} />
+      <MediaDisplay media={media} toggleFilter={toggleFilter} filter={filter} toggleSearch={toggleSearch} searchArr={searchArr} deleteMedia={deleteMedia} setNewId={setNewId} showEditForm={showEditForm} setShowEditForm={setShowEditForm} setNewTitle={setNewTitle} setNewRating={setNewRating} setNewFinishDate={setNewFinishDate} setShowForm={setShowForm}/>
 
     </div>
   )

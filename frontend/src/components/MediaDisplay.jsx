@@ -10,12 +10,14 @@ export default function MediaDisplay({
   setNewRating,
   setNewFinishDate,
   showEditForm,
-  setShowEditForm
+  setShowEditForm,
+  setShowForm
 
 }) {
  function handleShowEditForm() {
     if (showEditForm == false) {
       setShowEditForm(true)
+      setShowForm(false)
     } else {
       setShowEditForm(false)
     }
