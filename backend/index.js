@@ -1,27 +1,18 @@
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
+const Media = require('./models/media')
+const mongoose = require('mongoose')
 const app = express();
-
-const PORT = process.env.PORT
-
 
 app.use(express.json())
 app.use(cors())
 
 
-let media = [
-    { title: "Perfume", dateFinished: "4/5/26", rating: 2, id: Math.random().toString(36).slice(2) },
-    { title: "Perfame", dateFinished: "4/5/26", rating: 3, id: Math.random().toString(36).slice(2) },
-    { title: "Perfumt", dateFinished: "4/5/26", rating: 5, id: Math.random().toString(36).slice(2) },
-    { title: "Body Double", dateFinished: "6/4/26", rating: 3, id: Math.random().toString(36).slice(2)},
-    { title: "Malazan Book 2", dateFinished: "5/22/26", rating: 1, id: Math.random().toString(36).slice(2) },
-    { title: "Stalin", dateFinished: "5/22/1990", rating: 2, id: Math.random().toString(36).slice(2) },
-    { title: "King of the World", dateFinished: "5/01/19", rating: 1, id: Math.random().toString(36).slice(2)}
-]
-
-app.get('/api/media/', (request, response) => {
-    response.json(media)
+app.get('/api/media', (req, res) => {
+    Media.find({}).then(media => {
+        res.json(media)
+    })
 })
 
 app.get('/api/media/:id', (request, response) => {
@@ -63,24 +54,40 @@ app.patch('/api/media/:id', (req, res) => {
 
 
 
-app.post('/api/media', (request, response) => {
-    let mediaData = request.body;
+// app.post('/api/media', (request, response) => {
+//     let mediaData = request.body;
 
-    let newMedia = {
-        "title": mediaData.title,
-        "dateFinished": mediaData.dateFinished,
-        "rating": mediaData.rating,
-        "id": Math.random().toString(36).slice(2)
+//     let newMedia = {
+//         "title": mediaData.title,
+//         "dateFinished": mediaData.dateFinished,
+//         "rating": mediaData.rating,
+//         "id": Math.random().toString(36).slice(2)
+//     }
+
+//     media = [newMedia, ...media]
+
+//     response.status(201).json(newMedia)
+// })
+
+app.post('/api/media', (req, res) => {
+    const body = req.body
+    if(!body.content){
+        return res.status(400).json({ error: 'content missing' })
     }
 
-    media = [newMedia, ...media]
+    const media = new Media({
+        title: body.title,
+        dateFinished: body.dateFinished,
+        rating: body.rating
+    })
 
-    response.status(201).json(newMedia)
-
-
+    media.save().then(savedMedia => {
+        res.json(savedMedia)
+    })
 })
 
 
+const PORT = process.env.PORT
 
 
 app.listen(PORT, () => {
@@ -88,3 +95,16 @@ app.listen(PORT, () => {
 })
 
 
+
+
+
+
+// let media = [
+//     { title: "Perfume", dateFinished: "4/5/26", rating: 2, id: Math.random().toString(36).slice(2) },
+//     { title: "Perfame", dateFinished: "4/5/26", rating: 3, id: Math.random().toString(36).slice(2) },
+//     { title: "Perfumt", dateFinished: "4/5/26", rating: 5, id: Math.random().toString(36).slice(2) },
+//     { title: "Body Double", dateFinished: "6/4/26", rating: 3, id: Math.random().toString(36).slice(2)},
+//     { title: "Malazan Book 2", dateFinished: "5/22/26", rating: 1, id: Math.random().toString(36).slice(2) },
+//     { title: "Stalin", dateFinished: "5/22/1990", rating: 2, id: Math.random().toString(36).slice(2) },
+//     { title: "King of the World", dateFinished: "5/01/19", rating: 1, id: Math.random().toString(36).slice(2)}
+// ]
