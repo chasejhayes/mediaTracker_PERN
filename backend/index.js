@@ -15,31 +15,25 @@ app.get('/api/media', (req, res) => {
     })
 })
 
-// app.get('/api/media/:id', (request, response) => {
-//     const itemId = parseInt(request.params.id)
-//     const item = media.find(m => m.id === itemId)
-//     if (item) {
-//         response.json(item)
-//     } else {
-//         response.status(404).end()
-//     }
-
-// })
-
 app.get('/api/media/:id', (req, res) => {
     Media.findById(req.params.id).then(media => {
         res.json(media)
     })
 })
 
+// app.delete('/api/media/:id', (req, res) => {
+//     const id = req.params.id
+
+//     media = media.filter(item => item.id !== id)
+
+//     res.status(204).end()
+// })
+
 app.delete('/api/media/:id', (req, res) => {
-    const id = req.params.id
-
-    media = media.filter(item => item.id !== id)
-
-    res.status(204).end()
-
-
+    Media.findByIdAndDelete(req.params.id).then(result => {
+        res.status(204).end()
+    })
+    .catch(error => console.log(error))
 })
 
 
