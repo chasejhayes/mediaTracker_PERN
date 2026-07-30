@@ -21,13 +21,6 @@ app.get('/api/media/:id', (req, res) => {
     })
 })
 
-// app.delete('/api/media/:id', (req, res) => {
-//     const id = req.params.id
-
-//     media = media.filter(item => item.id !== id)
-
-//     res.status(204).end()
-// })
 
 app.delete('/api/media/:id', (req, res) => {
     Media.findByIdAndDelete(req.params.id).then(result => {
@@ -36,19 +29,20 @@ app.delete('/api/media/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
-
 app.patch('/api/media/:id', (req, res) => {
-    const id = req.params.id
-    media = media.map(item =>
-        item.id === id
-            ? { ...item, ...req.body }
-            : item
+    const update = req.body;
+    Media.findByIdAndUpdate(req.params.id, update)
+    .then(media => {
+        if(!media){
+            return res.status(404).end()
+        }
+    return (
+        res.json(update)
     )
-
-    const updatedMedia = media.find(item =>
-        item.id === id
-    )
-    res.json(updatedMedia)
+    })
+    .catch(err => {
+        res.status(400).json({ error: err.message })
+    })
 })
 
 
