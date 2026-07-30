@@ -16,9 +16,21 @@ mongoose.connect(url, {family: 4})
 
 
 const mediaSchema = new mongoose.Schema({
-    title: String,
-    dateFinished: String,
-    rating: Number,
+    title: {
+        type: String,
+        minLength: 1,
+        required: true
+    },
+    dateFinished: {
+        type: String,
+        minLength: 6,
+        required: true
+    },
+    rating: {
+        type: Number,
+        minLength: 1,
+        required: true
+    }
 })
 
 

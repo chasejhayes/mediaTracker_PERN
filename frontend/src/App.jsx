@@ -135,18 +135,7 @@ function App() {
     setShowEditForm(false)
   }
 
-  // Search/filter/sort bugs
-  // Filtered results can not be searched
-  // Filtered results do not sort
-  // Searched results can not be filtered
-  // Searched results can not be sorted
 
-  // Sorted results CAN be searched!
-  // Sorted results CAN be filtered!
-
-  // Filter doesn't work because it's displaying a filtered form of the media list. The media list itself stays the same unlike with the sort function which directly changes media
-  // Same issue for the search bar, it's filtering 'media' not changing it
-  // Solution: try using map to return a new version of media array
 
   
 
