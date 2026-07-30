@@ -15,15 +15,21 @@ app.get('/api/media', (req, res) => {
     })
 })
 
-app.get('/api/media/:id', (request, response) => {
-    const itemId = parseInt(request.params.id)
-    const item = media.find(m => m.id === itemId)
-    if (item) {
-        response.json(item)
-    } else {
-        response.status(404).end()
-    }
+// app.get('/api/media/:id', (request, response) => {
+//     const itemId = parseInt(request.params.id)
+//     const item = media.find(m => m.id === itemId)
+//     if (item) {
+//         response.json(item)
+//     } else {
+//         response.status(404).end()
+//     }
 
+// })
+
+app.get('/api/media/:id', (req, res) => {
+    Media.findById(req.params.id).then(media => {
+        res.json(media)
+    })
 })
 
 app.delete('/api/media/:id', (req, res) => {
