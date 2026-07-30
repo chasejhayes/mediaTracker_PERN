@@ -1,10 +1,11 @@
-export default function SearchBar({ test, setToggleSearch, setTest, setSearchArr, media }) {
+export default function SearchBar({ test, setToggleSearch, setTest, setSearchArr, media, setMedia }) {
 
   const handleSearchChange = (e) => {
     setToggleSearch(true)
     setTest(e.target.value)
     let filtered = media.filter(media => media.title.startsWith(e.target.value))
     setSearchArr(filtered)
+    // setMedia(filtered)
     if (e.target.value === "") {
       setToggleSearch(false)
     }

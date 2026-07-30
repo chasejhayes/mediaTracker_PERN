@@ -53,25 +53,9 @@ app.patch('/api/media/:id', (req, res) => {
 
 
 
-
-// app.post('/api/media', (request, response) => {
-//     let mediaData = request.body;
-
-//     let newMedia = {
-//         "title": mediaData.title,
-//         "dateFinished": mediaData.dateFinished,
-//         "rating": mediaData.rating,
-//         "id": Math.random().toString(36).slice(2)
-//     }
-
-//     media = [newMedia, ...media]
-
-//     response.status(201).json(newMedia)
-// })
-
 app.post('/api/media', (req, res) => {
     const body = req.body
-    if(!body.content){
+    if(!body.title || !body.rating || !body.dateFinished){
         return res.status(400).json({ error: 'content missing' })
     }
 
