@@ -13,12 +13,25 @@ app.get('/api/media', (req, res) => {
     Media.find({}).then(media => {
         res.json(media)
     })
+    .catch(error => {
+        console.log(error)
+        res.status(500).end()
+    })
 })
 
 app.get('/api/media/:id', (req, res) => {
-    Media.findById(req.params.id).then(media => {
-        res.json(media)
-    })
+    Media.findById(req.params.id)
+        .then(media => {
+            if (media) {
+                res.json(media)
+            } else {
+                res.status(404).end()
+            }
+        })
+        .catch(error => {
+            console.log(error)
+            res.status(400).send({ error: 'malformatted id' })
+        })
 })
 
 
@@ -26,30 +39,30 @@ app.delete('/api/media/:id', (req, res) => {
     Media.findByIdAndDelete(req.params.id).then(result => {
         res.status(204).end()
     })
-    .catch(error => console.log(error))
+        .catch(error => console.log(error))
 })
 
 app.patch('/api/media/:id', (req, res) => {
     const update = req.body;
     Media.findByIdAndUpdate(req.params.id, update)
-    .then(media => {
-        if(!media){
-            return res.status(404).end()
-        }
-    return (
-        res.json(update)
-    )
-    })
-    .catch(err => {
-        res.status(400).json({ error: err.message })
-    })
+        .then(media => {
+            if (!media) {
+                return res.status(404).end()
+            }
+            return (
+                res.json(update)
+            )
+        })
+        .catch(err => {
+            res.status(400).json({ error: err.message })
+        })
 })
 
 
 
 app.post('/api/media', (req, res) => {
     const body = req.body
-    if(!body.title || !body.rating || !body.dateFinished){
+    if (!body.title || !body.rating || !body.dateFinished) {
         return res.status(400).json({ error: 'content missing' })
     }
 
@@ -61,6 +74,9 @@ app.post('/api/media', (req, res) => {
 
     media.save().then(savedMedia => {
         res.json(savedMedia)
+    })
+    .catch(error => {
+        console.log(error)
     })
 })
 
@@ -75,14 +91,3 @@ app.listen(PORT, () => {
 
 
 
-
-
-// let media = [
-//     { title: "Perfume", dateFinished: "4/5/26", rating: 2, id: Math.random().toString(36).slice(2) },
-//     { title: "Perfame", dateFinished: "4/5/26", rating: 3, id: Math.random().toString(36).slice(2) },
-//     { title: "Perfumt", dateFinished: "4/5/26", rating: 5, id: Math.random().toString(36).slice(2) },
-//     { title: "Body Double", dateFinished: "6/4/26", rating: 3, id: Math.random().toString(36).slice(2)},
-//     { title: "Malazan Book 2", dateFinished: "5/22/26", rating: 1, id: Math.random().toString(36).slice(2) },
-//     { title: "Stalin", dateFinished: "5/22/1990", rating: 2, id: Math.random().toString(36).slice(2) },
-//     { title: "King of the World", dateFinished: "5/01/19", rating: 1, id: Math.random().toString(36).slice(2)}
-// ]
