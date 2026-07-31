@@ -77,6 +77,12 @@ app.post('/api/media', (req, res) => {
     })
 })
 
+// Add this to handle requests to the root URL
+app.get('/', (req, res) => {
+    res.status(200).json({ message: "Backend is running smoothly!" });
+});
+
+
 
 const PORT = process.env.PORT
 
