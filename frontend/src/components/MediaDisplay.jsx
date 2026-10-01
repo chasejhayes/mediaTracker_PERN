@@ -23,6 +23,7 @@ export default function MediaDisplay({
     }
   }
   let displayType = media;
+  console.log(media)
   if (toggleFilter) {
     displayType = filter
   } else if (toggleSearch) {

@@ -161,7 +161,7 @@ function App() {
 
       <Error error={error} text={`${error}`} />
 
-      <MediaDisplay media={media} toggleFilter={toggleFilter} filter={filter} toggleSearch={toggleSearch} searchArr={searchArr} deleteMedia={deleteMedia} setNewId={setNewId} showEditForm={showEditForm} setShowEditForm={setShowEditForm} setNewTitle={setNewTitle} setNewRating={setNewRating} setNewFinishDate={setNewFinishDate} setShowForm={setShowForm}/>
+     <MediaDisplay media={media} toggleFilter={toggleFilter} filter={filter} toggleSearch={toggleSearch} searchArr={searchArr} deleteMedia={deleteMedia} setNewId={setNewId} showEditForm={showEditForm} setShowEditForm={setShowEditForm} setNewTitle={setNewTitle} setNewRating={setNewRating} setNewFinishDate={setNewFinishDate} setShowForm={setShowForm}/>
 
     </div>
   )
