@@ -1,23 +1,47 @@
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
-const Media = require('./models/media')
 const mongoose = require('mongoose')
 const app = express();
 
+
+// Middlewares
 app.use(express.json())
 app.use(cors())
 
+// Routes
+
+
+
+
+// Error handling middleware
+
+
+// Server running
+
+let notes = [
+  {
+    title: "Test",
+    releaseDate: "123123",
+    rating: 10
+  },
+]
+
+// app.get('/api/media', (req, res) => {
+//     Media.find({}).then(media => {
+//         res.json(media)
+//     })
+//     .catch(error => {
+//         console.log(error)
+//         res.status(500).end()
+//     })
+// })
 
 app.get('/api/media', (req, res) => {
-    Media.find({}).then(media => {
-        res.json(media)
-    })
-    .catch(error => {
-        console.log(error)
-        res.status(500).end()
-    })
+    res.json(notes)
+
 })
+
 
 app.get('/api/media/:id', (req, res) => {
     Media.findById(req.params.id)
@@ -84,8 +108,9 @@ app.get('/', (req, res) => {
 
 
 
-const PORT = process.env.PORT
 
+// Server running
+const PORT = process.env.PORT 
 
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}.`)
@@ -95,3 +120,4 @@ app.listen(PORT, () => {
 
 
 module.exports = app
+
