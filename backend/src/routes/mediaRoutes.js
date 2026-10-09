@@ -1,5 +1,5 @@
 import express from "express"
-import { createMedia, deleteMedia, getAllMedias, getMediabyId, updateMedia } from "../controller/mediaControllers";
+import { createMedia, deleteMedia, getAllMedias, getMediabyId, updateMedia } from "../controller/mediaControllers.js";
 
 const router = express.Router();
 

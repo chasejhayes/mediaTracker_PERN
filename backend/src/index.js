@@ -5,6 +5,7 @@ import cors from "cors"
 import pool from "./config/db.js"
 import mediaRoutes from "./routes/mediaRoutes.js"
 import errorHandling from "./middleware/errorHandler.js"
+import createMediaTable from "./data/createMediaTable.js"
 dotenv.config()
 const app = express();
 
@@ -12,6 +13,10 @@ const app = express();
 // Middlewares
 app.use(express.json())
 app.use(cors())
+
+// Create table before starting server
+createMediaTable();
+
 
 // Routes
 app.use("/api", mediaRoutes)

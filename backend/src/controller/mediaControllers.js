@@ -1,6 +1,6 @@
 // Standardized response function
 
-import { createMovieService, deleteMovieService, getAllMoviesService, getMovieByIdService, updateMovieService } from "../models/movieModel";
+import { createMediaService, deleteMediaService, getAllMediasService, getMediaByIdService, updateMediaService } from "../models/mediaModel.js";
 
 const handleResponse = ( res, status, message, data=null) => {
     res.status(status).json({
@@ -10,52 +10,52 @@ const handleResponse = ( res, status, message, data=null) => {
     })
 };
 
-export const createMovie = async (req, res, next) => {
+export const createMedia = async (req, res, next) => {
     const { title, rating, dateFinished } = req.body;
     try {
-        const newMovie = await createMovieService(title, rating, dateFinished);
-        handleResponse(res, 201, "Movie created successfully", newMovie)
+        const newMedia = await createMediaService(title, rating, dateFinished);
+        handleResponse(res, 201, "Media created successfully", newMedia)
     } catch (err) {
         next(err)
     }
 };
 
-export const getAllMovies = async (req, res, next) => {
+export const getAllMedias = async (req, res, next) => {
     try {
-        const movies = await getAllMoviesService();
-        handleResponse(res, 200, "Movies fetched successfully", movies)
+        const Medias = await getAllMediasService();
+        handleResponse(res, 200, "Medias fetched successfully", Medias)
     
     } catch (err) {
         next(err)
     }
 };
 
-export const getMoviebyId = async (req, res, next) => {
+export const getMediabyId = async (req, res, next) => {
     try {
-        const movie = await getMovieByIdService(req.params.id);
-        if(!movie) return handleResponse(res, 404, "Movie not found");
-        handleResponse(res, 200, "Movie fetched successfully", movie)
+        const Media = await getMediaByIdService(req.params.id);
+        if(!Media) return handleResponse(res, 404, "Media not found");
+        handleResponse(res, 200, "Media fetched successfully", Media)
     } catch (err) {
         next(err)
     }
 }
 
-export const updateMovie = async(req, res, next) => {
+export const updateMedia = async(req, res, next) => {
     const { title, rating, dateFinished } = req.body;
     try {
-        const updatedMovie = await updateMovieService(req.params.id, title, rating, dateFinished);
-        if(!updatedMovie) return handleResponse(res, 404, "Movie not found");
-        handleResponse(res, 200, "Movie updated successfully", updateMovie)
+        const updatedMedia = await updateMediaService(req.params.id, title, rating, dateFinished);
+        if(!updatedMedia) return handleResponse(res, 404, "Media not found");
+        handleResponse(res, 200, "Media updated successfully", updateMedia)
     } catch (err) {
         next(err)
     }
 };
 
-export const deleteMovie = async(req, res, next) => {
+export const deleteMedia = async(req, res, next) => {
     try {
-        const deletedMovie = await deleteMovieService(req.params.id);
-        if(!deletedMovie) return handleResponse(res, 404, "Movie not found");
-        handleResponse(res, 200, "User deleted successfully", deleteMovie)
+        const deletedMedia = await deleteMediaService(req.params.id);
+        if(!deletedMedia) return handleResponse(res, 404, "Media not found");
+        handleResponse(res, 200, "User deleted successfully", deleteMedia)
     } catch (err) {
         next(err)
         
