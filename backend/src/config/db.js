@@ -4,7 +4,7 @@ dotenv.config()
 const { Pool } = pkg;
 
 console.log(process.env.DB_USER)
-console.log("test")
+
 
 const pool = new Pool({
     user: process.env.DB_USER,

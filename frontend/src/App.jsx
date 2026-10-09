@@ -38,29 +38,13 @@ function App() {
 
 
 
-  // useEffect(() => {
-  //   axios.get(`http://localhost:5001/api/media`)
-  //     .then((response) => {
-  //       if (response.data.length > 0) {
-  //         setMedia(response.data)
-  //       } else {
-  //         setEmpty(true)
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error)
-  //       setError(error)
-  //     })
-  //     .finally(() => {
-  //       setLoading(false)
-  //     })
-  // }, [])
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/media`)
+    axios.get(`${BASE_URL}/api/media`)
       .then((response) => {
-        if (response.data.length > 0) {
-          setMedia(response.data)
+        console.log(response.data.data.length)
+        if (response.data.data.length > 0) {
+          setMedia(response.data.data)
         } else {
           setEmpty(true)
         }

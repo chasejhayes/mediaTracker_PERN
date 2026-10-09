@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS medias (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    rating VARCHAR(100) NOT NULL,
+    dateFinished VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
+)
