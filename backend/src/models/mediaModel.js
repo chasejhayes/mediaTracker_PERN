@@ -17,6 +17,8 @@ export const createMediaService = async (title, rating, dateFinished) => {
 
 export const updateMediaService = async (id, title, rating, dateFinished) => {
     const result = await pool.query("UPDATE Medias SET title=$1, rating=$2, dateFinished=$3 WHERE id=$4 RETURNING *", [title, rating, dateFinished, id]);
+    console.log(result)
+    console.log(result.rows[0])
     return result.rows[0]
 
 };

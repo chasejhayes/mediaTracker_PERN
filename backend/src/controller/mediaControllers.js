@@ -45,7 +45,7 @@ export const updateMedia = async(req, res, next) => {
     try {
         const updatedMedia = await updateMediaService(req.params.id, title, rating, dateFinished);
         if(!updatedMedia) return handleResponse(res, 404, "Media not found");
-        handleResponse(res, 200, "Media updated successfully", updateMedia)
+        handleResponse(res, 200, "Media updated successfully", updatedMedia)
     } catch (err) {
         next(err)
     }
@@ -55,7 +55,7 @@ export const deleteMedia = async(req, res, next) => {
     try {
         const deletedMedia = await deleteMediaService(req.params.id);
         if(!deletedMedia) return handleResponse(res, 404, "Media not found");
-        handleResponse(res, 200, "User deleted successfully", deleteMedia)
+        handleResponse(res, 200, "User deleted successfully", deletedMedia)
     } catch (err) {
         next(err)
         

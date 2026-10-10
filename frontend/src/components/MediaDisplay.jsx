@@ -35,11 +35,11 @@ export default function MediaDisplay({
         {displayType.map((media) =>
             <li className="list_item" key={media.id}>
               <h2>{media.title}</h2>
-              <p>Date Finished: {media.dateFinished}</p>
+              <p>Date Finished: {media.datefinished}</p>
               <p>Rating: {media.rating}</p>
               <button onClick={() => deleteMedia(media.id)}
               >Delete</button>
-              <button onClick={() => { setNewId(media.id); setNewTitle(media.title); setNewRating(media.rating); setNewFinishDate(media.dateFinished), handleShowEditForm() }}>
+              <button onClick={() => { setNewId(media.id); setNewTitle(media.title); setNewRating(media.rating); setNewFinishDate(media.datefinished), handleShowEditForm() }}>
                 Edit
               </button>
             </li>

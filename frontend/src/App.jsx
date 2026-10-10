@@ -74,15 +74,17 @@ function App() {
     }
     axios.post(`${BASE_URL}/api/media`, titleObject)
       .then(res => {
+        console.log(res.data)
         // TODO: turn into switch statement (?)
         if (sort === 'default') {
-          setMedia([res.data, ...media])
+          setMedia([res.data.data, ...media])
+          console.log(media)
         } else if (sort === 'al') {
-          sortByTitle(res.data, media, setMedia)
+          sortByTitle(res.data.data, media, setMedia)
         } else if (sort === 'rating') {
-          sortByRating(res.data, media, setMedia)
+          sortByRating(res.data.data, media, setMedia)
         } else if (sort === 'finished') {
-          sortByDate(res.data, media, setMedia)
+          sortByDate(res.data.data, media, setMedia)
         }
         setNewTitle('')
         setNewRating('')
@@ -106,6 +108,7 @@ function App() {
   function editMedia(e) {
     e.preventDefault()
     let id = newId;
+    console.log(id)
 
     setNewTitle('')
     setNewRating('')
@@ -119,15 +122,16 @@ function App() {
         dateFinished: newFinishDate,
         id: newId
       }
+      console.log(patchRequest)
 
-    axios.patch(
+    axios.put(
       `${BASE_URL}/api/media/${id}`, patchRequest
-    )
-      .then(response => {
+    ).then(response => {
         console.log(`${BASE_URL}/api/media/${id}`)
+        console.log(response)
         setMedia(media.map(item =>
           item.id === id
-            ? response.data
+            ? response.data.data
             : item
         ))
       })
