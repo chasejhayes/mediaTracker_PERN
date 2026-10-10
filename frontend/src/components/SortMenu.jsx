@@ -44,8 +44,9 @@ const sortOptions = [
   }
 
   function sortByDate() {
+    console.log(media.sort((a, b) => new Date(b.datefinished) - new Date(a.datefinished)))
     return setMedia(
-      media.sort((a, b) => new Date(b.dateFinished) - new Date(a.dateFinished))
+      media.sort((a, b) => new Date(b.datefinished) - new Date(a.datefinished))
     )
   }
 
