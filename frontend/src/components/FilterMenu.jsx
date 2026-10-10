@@ -8,21 +8,23 @@ export default function FilterMenu({ media, setFilter, setToggleFilter}) {
         setToggleFilter(false)
     } else if (selectedValue === "one") {
         setToggleFilter(true)
-        return setFilter(media.filter(media => media.rating === 1))
+        console.log(media)
+        console.log(media.filter(media => media.rating === 1))
+        return setFilter(media.filter(media => media.rating === "1"))
     }
     else if (selectedValue === "two") {
         setToggleFilter(true)
-        return setFilter(media.filter(media => media.rating === 2))
+        return setFilter(media.filter(media => media.rating === "2"))
     } else if (selectedValue === "three") {
         setToggleFilter(true)
-        return setFilter(media.filter(media => media.rating === 3))
+        return setFilter(media.filter(media => media.rating === "3"))
     }
     else if (selectedValue === "four") {
         setToggleFilter(true)
-        return setFilter(media.filter(media => media.rating === 4))
+        return setFilter(media.filter(media => media.rating === "4"))
     } else if (selectedValue === "five") {
         setToggleFilter(true)
-        return setFilter(media.filter(media => media.rating === 5))
+        return setFilter(media.filter(media => media.rating === "5"))
     }
 }
 
